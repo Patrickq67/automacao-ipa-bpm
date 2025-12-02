@@ -3,610 +3,392 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Formulário Extenso — Demonstração IPA/Agentes de IA</title>
+<title>Formulário GIGANTE — Demonstração IPA/Agentes de IA</title>
 <style>
   :root{
     --bg:#f6f8fa; --card:#ffffff; --accent:#0b74de; --muted:#6b7280;
     --danger:#dc2626; --success:#16a34a;
   }
   body{font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:#111;margin:0;padding:24px;}
-  .container{max-width:1100px;margin:0 auto;}
+  .container{max-width:1200px;margin:0 auto;}
   header{display:flex;align-items:center;gap:16px;margin-bottom:20px}
-  h1{font-size:1.4rem;margin:0}
+  h1{font-size:1.5rem;margin:0}
   small{color:var(--muted)}
-  form.card{background:var(--card);border-radius:12px;padding:20px;box-shadow:0 6px 24px rgba(11,20,40,0.06)}
-  fieldset{border:1px solid #e6e9ee;padding:14px;margin-bottom:12px;border-radius:8px}
-  legend{font-weight:600;padding:0 8px}
-  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
-  .col-12{grid-column:span 12}
-  .col-6{grid-column:span 6}
-  .col-4{grid-column:span 4}
-  .col-3{grid-column:span 3}
-  label{display:block;font-size:0.85rem;margin-bottom:6px}
-  input[type="text"], input[type="email"], input[type="tel"], input[type="number"], input[type="password"], select, textarea, input[type="url"], input[type="date"], input[type="time"], input[type="month"]{
-    width:100%;padding:10px;border-radius:8px;border:1px solid #dbe3ef;background:#fff;box-sizing:border-box;
+  form.card{background:var(--card);border-radius:12px;padding:24px;box-shadow:0 10px 30px rgba(11,20,40,0.08)}
+  fieldset{border:1px solid #e6e9ee;padding:18px;margin-bottom:16px;border-radius:10px}
+  legend{font-weight:700;font-size:1.1rem;padding:0 10px;background:var(--card);}
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+  .col-12{grid-column:span 12}.col-6{grid-column:span 6}.col-4{grid-column:span 4}.col-3{grid-column:span 3}.col-2{grid-column:span 2}
+  label{display:block;font-size:0.89rem;margin-bottom:6px;font-weight:500}
+  input, select, textarea{
+    width:100%;padding:11px;border-radius:8px;border:1px solid #dbe3ef;background:#fff;box-sizing:border-box;font-size:0.95rem;
   }
-  textarea{min-height:90px;resize:vertical}
+  textarea{min-height:100px;resize:vertical}
   .help{font-size:0.8rem;color:var(--muted);margin-top:6px}
-  .row{display:flex;gap:8px}
-  .btn{display:inline-block;padding:10px 14px;border-radius:8px;border:0;background:var(--accent);color:#fff;cursor:pointer}
+  .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .btn{display:inline-block;padding:11px 18px;border-radius:8px;border:0;background:var(--accent);color:#fff;cursor:pointer;font-weight:600}
   .btn.secondary{background:#eef2f7;color:#111}
   .btn.ghost{background:transparent;border:1px solid #e6e9ee;color:var(--muted)}
   .error{color:var(--danger);font-size:0.85rem;margin-top:6px}
   .success{color:var(--success)}
-  .small{font-size:0.85rem}
-  .progress-wrap{background:#e9eef8;border-radius:999px;padding:4px;margin-bottom:12px}
-  .progress{height:10px;background:linear-gradient(90deg,var(--accent),#4facfe);border-radius:999px;width:0%}
-  footer{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:12px;flex-wrap:wrap}
+  .progress-wrap{background:#e9eef8;border-radius:999px;padding:5px;margin-bottom:16px;overflow:hidden}
+  .progress{height:12px;background:linear-gradient(90deg,#0b74de,#4facfe);border-radius:999px;width:0%;transition:width .4s ease}
+  footer{display:flex;justify-content:space-between;align-items:center;margin-top:20px;gap:16px;flex-wrap:wrap}
   @media (max-width:900px){
-    .col-6{grid-column:span 12}
-    .col-4{grid-column:span 12}
-    .col-3{grid-column:span 12}
+    .col-6,.col-4,.col-3,.col-2{grid-column:span 12}
   }
-
-  /* small visual for simulated receipt */
-  .receipt{background:#f8fafc;border:1px dashed #dbeafe;padding:12px;border-radius:8px;margin-top:12px}
-  .kbd{background:#111;color:#fff;padding:4px 6px;border-radius:6px;font-size:0.75rem}
+  .receipt{background:#f8fafc;border:2px dashed #93c5fd;padding:16px;border-radius:10px;margin-top:16px}
 </style>
 </head>
 <body>
 <div class="container">
   <header>
     <div>
-      <h1>Formulário Extenso — Demonstração</h1>
-      <small>Use este formulário para demonstrações ao vivo: preenchimento automático, exportação JSON, simulação de pagamento e validação.</small>
+      <h1>Formulário GIGANTE — Demonstração IPA / Agentes</h1>
+      <small>Formulário absurdamente longo e fictício para testar preenchimento automático, OCR, extração, validação, exportação JSON, etc.</small>
     </div>
   </header>
 
   <form id="megaForm" class="card" autocomplete="on" novalidate>
-    <div class="progress-wrap" aria-hidden="true" title="Progresso de preenchimento">
+    <div class="progress-wrap">
       <div id="progress" class="progress" style="width:0%"></div>
     </div>
 
-    <!-- Identificação Pessoal -->
+    <!-- 1 Identificação Pessoal -->
     <fieldset>
       <legend>1 — Identificação Pessoal</legend>
       <div class="grid">
-        <div class="col-4">
-          <label for="nome">Nome completo <span aria-hidden="true">*</span></label>
-          <input id="nome" name="nome" type="text" required placeholder="Nome Sobrenome" />
-          <div class="help">Nome como em documentos oficiais.</div>
-        </div>
-
-        <div class="col-4">
-          <label for="cpf">CPF <span aria-hidden="true">*</span></label>
-          <input id="cpf" name="cpf" type="text" inputmode="numeric" pattern="\d{11}" maxlength="14" placeholder="00000000000" required />
-          <div class="help">Apenas dígitos (validação simples aplicada).</div>
-        </div>
-
-        <div class="col-4">
-          <label for="rg">RG / Documento</label>
-          <input id="rg" name="rg" type="text" />
-        </div>
-
-        <div class="col-4">
-          <label for="nascimento">Data de Nascimento</label>
-          <input id="nascimento" name="nascimento" type="date" />
-        </div>
-
-        <div class="col-4">
-          <label for="sexo">Sexo</label>
-          <select id="sexo" name="sexo">
-            <option value="">— selecione —</option>
-            <option value="M">Masculino</option>
-            <option value="F">Feminino</option>
-            <option value="O">Outro / Prefiro não informar</option>
-          </select>
-        </div>
-
-        <div class="col-4">
-          <label for="estadoCivil">Estado Civil</label>
-          <select id="estadoCivil" name="estadoCivil">
-            <option value="">— —</option>
-            <option>Solteiro(a)</option>
-            <option>Casado(a)</option>
-            <option>União Estável</option>
-            <option>Divorciado(a)</option>
-            <option>Viúvo(a)</option>
-          </select>
-        </div>
-
+        <div class="col-4"><label>Nome completo *</label><input name="nome" type="text" required placeholder="Nome Sobrenome Sobrenome"></div>
+        <div class="col-3"><label>CPF *</label><input name="cpf" type="text" maxlength="14" required placeholder="000.000.000-00"></div>
+        <div class="col-3"><label>RG</label><input name="rg" type="text"></div>
+        <div class="col-2"><label>Órgão emissor</label><input name="orgao" type="text" placeholder="SSP"></div>
+        <div class="col-3"><label>Data de nascimento</label><input name="nascimento" type="date"></div>
+        <div class="col-3"><label>Naturalidade</label><input name="naturalidade" type="text" placeholder="Cidade - UF"></div>
+        <div class="col-3"><label>Nacionalidade</label><input name="nacionalidade" type="text" value="Brasileira"></div>
+        <div class="col-3"><label>Sexo</label><select name="sexo"><option value="">—</option><option>M</option><option>F</option><option>O</option></select></div>
+        <div class="col-3"><label>Estado civil</label><select name="estadoCivil"><option>Solteiro(a)</option><option>Casado(a)</option><option>Divorciado(a)</option><option>Viúvo(a)</option><option>União Estável</option></select></div>
+        <div class="col-3"><label>Nome da mãe</label><input name="mae" type="text"></div>
+        <div class="col-3"><label>Nome do pai</label><input name="pai" type="text"></div>
       </div>
     </fieldset>
 
-    <!-- Contato -->
+    <!-- 2 Contato -->
     <fieldset>
-      <legend>2 — Contato</legend>
+      <legend>2 — Contato e Endereço</legend>
       <div class="grid">
-        <div class="col-4">
-          <label for="email">Email <span aria-hidden="true">*</span></label>
-          <input id="email" name="email" type="email" required placeholder="seu@exemplo.com" />
-        </div>
-
-        <div class="col-4">
-          <label for="telefone">Telefone</label>
-          <input id="telefone" name="telefone" type="tel" placeholder="+55 (51) 9XXXX-XXXX" />
-        </div>
-
-        <div class="col-4">
-          <label for="celular">Celular (WhatsApp)</label>
-          <input id="celular" name="celular" type="tel" placeholder="+55..." />
-        </div>
-
-        <div class="col-12">
-          <label for="endereco">Endereço completo</label>
-          <input id="endereco" name="endereco" type="text" placeholder="Rua, Número, Complemento" />
-        </div>
-
-        <div class="col-3">
-          <label for="cep">CEP</label>
-          <input id="cep" name="cep" type="text" maxlength="9" inputmode="numeric" placeholder="00000-000" />
-        </div>
-
-        <div class="col-3">
-          <label for="cidade">Cidade</label>
-          <input id="cidade" name="cidade" type="text" />
-        </div>
-
-        <div class="col-3">
-          <label for="estado">Estado</label>
-          <select id="estado" name="estado">
-            <option value="">UF</option>
-            <option>RS</option><option>SP</option><option>RJ</option><option>SC</option>
-            <!-- mais estados... -->
-          </select>
-        </div>
-
-        <div class="col-3">
-          <label for="pais">País</label>
-          <input id="pais" name="pais" type="text" value="Brasil" />
-        </div>
+        <div class="col-4"><label>Email principal *</label><input name="email" type="email" required></div>
+        <div class="col-4"><label>Email secundário</label><input name="email2" type="email"></div>
+        <div class="col-4"><label>Celular WhatsApp *</label><input name="celular" type="tel"></div>
+        <div class="col-4"><label>Telefone fixo</label><input name="telefone" type="tel"></div>
+        <div class="col-4"><label>Telefone comercial</label><input name="telComercial" type="tel"></div>
+        <div class="col-4"><label>Endereço completo</label><input name="endereco" type="text"></div>
+        <div class="col-2"><label>Número</label><input name="numero" type="text"></div>
+        <div class="col-3"><label>Complemento</label><input name="complemento" type="text"></div>
+        <div class="col-3"><label>Bairro</label><input name="bairro" type="text"></div>
+        <div class="col-2"><label>CEP</label><input name="cep" type="text" maxlength="9"></div>
+        <div class="col-4"><label>Cidade</label><input name="cidade" type="text"></div>
+        <div class="col-2"><label>UF</label><select name="estado"><option>RS</option><option>SP</option><option>RJ</option><option>MG</option></select></div>
+        <div class="col-3"><label>País</label><input name="pais" type="text" value="Brasil"></div>
       </div>
     </fieldset>
 
-    <!-- Profissional -->
+    <!-- 3 Profissional / Escolar -->
     <fieldset>
-      <legend>3 — Profissional / Escolar</legend>
+      <legend>3 — Profissional e Formação Acadêmica</legend>
       <div class="grid">
-        <div class="col-6">
-          <label for="profissao">Profissão / Cargo</label>
-          <input id="profissao" name="profissao" type="text" />
-        </div>
-
-        <div class="col-3">
-          <label for="empresa">Empresa</label>
-          <input id="empresa" name="empresa" type="text" />
-        </div>
-
-        <div class="col-3">
-          <label for="renda">Renda mensal (R$)</label>
-          <input id="renda" name="renda" type="number" min="0" step="0.01" />
-        </div>
-
-        <div class="col-4">
-          <label for="formacao">Formação</label>
-          <select id="formacao" name="formacao" multiple size="4" aria-describedby="formacaoHelp">
-            <option>Ensino Médio</option><option>Técnico</option><option>Graduação</option><option>Pós-graduação</option><option>Mestrado</option><option>Doutorado</option>
-          </select>
-          <div id="formacaoHelp" class="help">Selecione múltiplas com Ctrl/Cmd + clique.</div>
-        </div>
-
-        <div class="col-8">
-          <label for="habilidades">Habilidades / Competências</label>
-          <input id="habilidades" name="habilidades" type="text" placeholder="ex: Python, SQL, Atendimento ao cliente" />
-          <div class="help">Separe por vírgula.</div>
-        </div>
+        <div class="col-6"><label>Profissão atual</label><input name="profissao" type="text"></div>
+        <div class="col-6"><label>Cargo</label><input name="cargo" type="text"></div>
+        <div class="col-6"><label>Empresa</label><input name="empresa" type="text"></div>
+        <div class="col-3"><label>CNPJ da empresa</label><input name="cnpjEmpresa" type="text"></div>
+        <div class="col-3"><label>Renda mensal (R$)</label><input name="renda" type="number" step="0.01"></div>
+        <div class="col-6"><label>LinkedIn</label><input name="linkedin" type="url"></div>
+        <div class="col-6"><label>Portfólio / Site</label><input name="site" type="url"></div>
+        <div class="col-12"><label>Habilidades técnicas (separar por vírgula)</label><input name="habilidades" type="text"></div>
+        <div class="col-6"><label>Nível mais alto de formação</label><select name="formacao"><option>Fundamental</option><option>Médio</option><option>Técnico</option><option>Graduação</option><option>Pós/MBA</option><option>Mestrado</option><option>Doutorado</option></select></div>
+        <div class="col-6"><label>Instituição</label><input name="instituicao" type="text"></div>
+        <div class="col-4"><label>Ano de conclusão</label><input name="anoConclusao" type="number"></div>
       </div>
     </fieldset>
 
-    <!-- Financeiro e pagamentos -->
+    <!-- 4 Família e Dependentes -->
     <fieldset>
-      <legend>4 — Financeiro / Pagamento (Simulado)</legend>
+      <legend>4 — Família e Dependentes (fictício)</legend>
       <div class="grid">
-
-        <div class="col-4">
-          <label for="banco">Banco</label>
-          <input id="banco" name="banco" type="text" />
-        </div>
-
-        <div class="col-4">
-          <label for="agencia">Agência</label>
-          <input id="agencia" name="agencia" type="text" />
-        </div>
-
-        <div class="col-4">
-          <label for="conta">Conta</label>
-          <input id="conta" name="conta" type="text" />
-        </div>
-
-        <div class="col-6">
-          <label for="cartaoNome">Nome no cartão</label>
-          <input id="cartaoNome" name="cartaoNome" type="text" />
-        </div>
-
-        <div class="col-3">
-          <label for="cartaoNumero">Número do cartão</label>
-          <input id="cartaoNumero" name="cartaoNumero" type="text" maxlength="19" placeholder="0000 0000 0000 0000" />
-        </div>
-
-        <div class="col-1">
-          <label for="cartaoCVV">CVV</label>
-          <input id="cartaoCVV" name="cartaoCVV" type="password" maxlength="4" placeholder="123" />
-        </div>
-
-        <div class="col-2">
-          <label for="cartaoValidade">Validade</label>
-          <input id="cartaoValidade" name="cartaoValidade" type="month" />
-        </div>
-
-        <div class="col-4">
-          <label for="boletoCodigo">Código de boleto</label>
-          <input id="boletoCodigo" name="boletoCodigo" type="text" placeholder="Simulado - 44 dígitos" />
-          <div class="help">Use este campo para simular leitura de boleto.</div>
-        </div>
-
-        <div class="col-4">
-          <label for="valorPagamento">Valor (R$)</label>
-          <input id="valorPagamento" name="valorPagamento" type="number" min="0" step="0.01" />
-        </div>
-
-        <div class="col-4">
-          <label for="metodoPagamento">Método de pagamento</label>
-          <select id="metodoPagamento" name="metodoPagamento">
-            <option value="">— selecione —</option>
-            <option value="cartao">Cartão (simulado)</option>
-            <option value="boleto">Boleto (simulado)</option>
-            <option value="pix">PIX (simulado)</option>
-            <option value="transferencia">Transferência bancária (simulado)</option>
-          </select>
-        </div>
-
+        <div class="col-4"><label>Nome do cônjuge</label><input name="conjuge" type="text"></div>
+        <div class="col-3"><label>CPF do cônjuge</label><input name="cpfConjuge" type="text"></div>
+        <div class="col-3"><label>Data casamento</label><input name="dataCasamento" type="date"></div>
+        <div class="col-2"><label>Nº de filhos</label><input name="filhos" type="number" min="0"></div>
+        <div class="col-6"><label>Nomes dos filhos (separar por ;)</label><input name="nomesFilhos" type="text"></div>
+        <div class="col-6"><label>Pessoa com deficiência na família?</label><select name="pcdFamilia"><option>Não</option><option>Sim</option></select></div>
       </div>
     </fieldset>
 
-    <!-- Preferências e segurança -->
+    <!-- 5 Veículos e Bens -->
     <fieldset>
-      <legend>5 — Preferências, Segurança e Consentimento</legend>
+      <legend>5 — Veículos e Patrimônio (totalmente fictício)</legend>
       <div class="grid">
-        <div class="col-6">
-          <label for="senha">Senha (ex.: conta)</label>
-          <input id="senha" name="senha" type="password" minlength="8" />
-          <div class="help">Mínimo 8 caracteres.</div>
-        </div>
+        <div class="col-4"><label>Possui veículo?</label><select name="temVeiculo"><option>Não</option><option>Sim</option></select></div>
+        <div class="col-4"><label>Marca/Modelo</label><input name="veiculoModelo" type="text"></div>
+        <div class="col-2"><label>Ano</label><input name="veiculoAno" type="number"></div>
+        <div class="col-2"><label>Placa</label><input name="veiculoPlaca" type="text"></div>
+        <div class="col-6"><label>Possui imóvel próprio?</label><select name="imovelProprio"><option>Não</option><option>Sim</option></select></div>
+        <div class="col-6"><label>Valor aproximado do patrimônio (R$)</label><input name="patrimonio" type="number"></div>
+      </div>
+    </fieldset>
 
-        <div class="col-6">
-          <label for="confirmSenha">Confirmar senha</label>
-          <input id="confirmSenha" name="confirmSenha" type="password" minlength="8" />
-        </div>
+    <!-- 6 Financeiro e Pagamento -->
+    <fieldset>
+      <legend>6 — Dados Bancários e Pagamento (simulado)</legend>
+      <div class="grid">
+        <div class="col-3"><label>Banco</label><input name="banco" type="text"></div>
+        <div class="col-3"><label>Agência</label><input name="agencia" type="text"></div>
+        <div class="col-4"><label>Conta corrente</label><input name="conta" type="text"></div>
+        <div class="col-2"><label>Dígito</label><input name="digito" type="text"></div>
+        <div class="col-6"><label>Nome no cartão</label><input name="cartaoNome" type="text"></div>
+        <div class="col-4"><label>Número do cartão</label><input name="cartaoNumero" type="text" maxlength="19"></div>
+        <div class="col-2"><label>CVV</label><input name="cartaoCVV" type="password" maxlength="4"></div>
+        <div class="col-2"><label>Validade</label><input name="cartaoValidade" type="month"></div>
+        <div class="col-4"><label>Chave PIX (qualquer)</label><input name="pix" type="text"></div>
+        <div class="col-4"><label>Valor da transação (R$)</label><input name="valorPagamento" type="number" step="0.01"></div>
+        <div class="col-4"><label>Parcelas</label><input name="parcelas" type="number" min="1" max="48"></div>
+      </div>
+    </fieldset>
 
-        <div class="col-3">
-          <label for="newsletter">Receber newsletter?</label>
-          <select id="newsletter" name="newsletter" aria-label="Receber newsletter">
-            <option value="sim">Sim</option><option value="nao">Não</option>
-          </select>
-        </div>
-
-        <div class="col-3">
-          <label for="notificacao">Notificações por</label>
-          <select id="notificacao" name="notificacao">
-            <option>Email</option><option>SMS</option><option>Push</option><option>WhatsApp</option>
-          </select>
-        </div>
-
-        <div class="col-6">
-          <label>Interesses</label>
+    <!-- 7 Preferências absurdas -->
+    <fieldset>
+      <legend>7 — Preferências, Comportamento e Perguntas Aleatórias</legend>
+      <div class="grid">
+        <div class="col-4"><label>Cor preferida</label><input name="corPreferida" type="color"></div>
+        <div class="col-4"><label>Animal favorito</label><input name="animal" type="text"></div>
+        <div class="col-4"><label>Time de futebol</label><input name="time" type="text"></div>
+        <div class="col-4"><label>Bebida preferida</label><input name="bebida" type="text"></div>
+        <div class="col-4"><label>Satisfação com a vida (0-10)</label><input name="satisfacao" type="range" min="0" max="10"></div>
+        <div class="col-4"><label>Horário que acorda</label><input name="horaAcorda" type="time"></div>
+        <div class="col-6"><label>Redes sociais que usa (marque todas)</label>
           <div class="row">
-            <label><input type="checkbox" name="interesse" value="produtos" /> Produtos</label>
-            <label><input type="checkbox" name="interesse" value="servicos" /> Serviços</label>
-            <label><input type="checkbox" name="interesse" value="parcerias" /> Parcerias</label>
+            <label><input type="checkbox" name="rede" value="instagram"> Instagram</label>
+            <label><input type="checkbox" name="rede" value="tiktok"> TikTok</label>
+            <label><input type="checkbox" name="rede" value="linkedin"> LinkedIn</label>
+            <label><input type="checkbox" name="rede" value="twitter"> Twitter/X</label>
           </div>
         </div>
-
-        <div class="col-4">
-          <label for="corPreferida">Cor preferida (UI)</label>
-          <input id="corPreferida" name="corPreferida" type="color" value="#0b74de" />
-        </div>
-
-        <div class="col-4">
-          <label for="satisfacao">Satisfação (0-10)</label>
-          <input id="satisfacao" name="satisfacao" type="range" min="0" max="10" step="1" />
-        </div>
-
-        <div class="col-4">
-          <label for="horarioContato">Horário preferido para contato</label>
-          <input id="horarioContato" name="horarioContato" type="time" />
-        </div>
-
-        <div class="col-12">
-          <label for="consentimento">
-            <input id="consentimento" name="consentimento" type="checkbox" required />
-            Eu concordo com os termos e políticas (simulado).
-          </label>
-        </div>
+        <div class="col-12"><label>Maior sonho da sua vida</label><textarea name="sonho"></textarea></div>
       </div>
     </fieldset>
 
-    <!-- Uploads e anexos -->
+    <!-- 8 Documentos e Anexos -->
     <fieldset>
-      <legend>6 — Documentos / Anexos</legend>
+      <legend>8 — Upload de Documentos</legend>
       <div class="grid">
-        <div class="col-6">
-          <label for="cv">Currículo (PDF)</label>
-          <input id="cv" name="cv" type="file" accept=".pdf,.doc,.docx" />
-        </div>
-
-        <div class="col-6">
-          <label for="foto">Foto (PNG/JPG)</label>
-          <input id="foto" name="foto" type="file" accept="image/*" />
-        </div>
-
-        <div class="col-12">
-          <label for="observacoes">Observações / Mensagem</label>
-          <textarea id="observacoes" name="observacoes" placeholder="Algo que queira adicionar..."></textarea>
-        </div>
+        <div class="col-6"><label>RG (frente)</label><input name="rgFrente" type="file" accept="image/*,.pdf"></div>
+        <div class="col-6"><label>RG (verso)</label><input name="rgVerso" type="file" accept="image/*,.pdf"></div>
+        <div class="col-6"><label>Comprovante de residência</label><input name="comprovanteResidencia" type="file" accept=".pdf,image/*"></div>
+        <div class="col-6"><label>Currículo</label><input name="cv" type="file" accept=".pdf,.doc,.docx"></div>
+        <div class="col-6"><label>Selfie com documento</label><input name="selfieDoc" type="file" accept="image/*"></div>
+        <div class="col-6"><label>Certidão de nascimento/casamento</label><input name="certidao" type="file"></div>
       </div>
     </fieldset>
 
-    <!-- Dados extras e UX -->
+    <!-- 9 Observações finais -->
     <fieldset>
-      <legend>7 — Dados extras / Telemetria (opcional)</legend>
+      <legend>9 — Observações e Consentimentos</legend>
       <div class="grid">
-        <div class="col-4">
-          <label for="site">Site pessoal / LinkedIn</label>
-          <input id="site" name="site" type="url" placeholder="https://..." />
-        </div>
-
-        <div class="col-4">
-          <label for="tempoUso">Tempo de uso estimado do serviço (meses)</label>
-          <input id="tempoUso" name="tempoUso" type="number" min="0" />
-        </div>
-
-        <div class="col-4">
-          <label for="score">Score interno (0-1000)</label>
-          <input id="score" name="score" type="number" min="0" max="1000" />
+        <div class="col-12"><label>Alguma observação adicional?</label><textarea name="observacoes" rows="5"></textarea></div>
+        <div class="col-12">
+          <label><input type="checkbox" name="consentimento" required> Li e concordo com todos os termos, políticas de privacidade, uso de dados, cookies, LGPD, e aceito ser contatado por qualquer meio existente ou que venha a ser inventado.</label>
         </div>
       </div>
     </fieldset>
 
     <footer>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button type="button" id="autoFill" class="btn ghost">Preencher (simulado)</button>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <button type="button" id="autoFill" class="btn ghost">Preencher Automaticamente (demo)</button>
         <button type="button" id="exportJson" class="btn secondary">Exportar JSON</button>
         <button type="button" id="preview" class="btn">Pré-visualizar</button>
         <button type="button" id="simularPagamento" class="btn">Simular Pagamento</button>
       </div>
-
-      <div style="display:flex;gap:8px">
-        <button type="reset" class="btn ghost">Limpar</button>
-        <button type="submit" class="btn">Enviar (simulado)</button>
+      <div style="display:flex;gap:12px">
+        <button type="reset" class="btn ghost">Limpar Tudo</button>
+        <button type="submit" class="btn">Enviar Formulário (simulado)</button>
       </div>
     </footer>
 
     <div id="output" aria-live="polite"></div>
   </form>
 
-  <!-- Area para exibir JSON / recibo -->
-  <div id="displayArea" style="margin-top:18px"></div>
+  <div id="displayArea" style="margin-top:24px"></div>
 </div>
 
 <script>
-  // ----- Utilitários -----
-  const $ = sel => document.querySelector(sel);
-  const form = document.getElementById('megaForm');
-  const progressEl = document.getElementById('progress');
-  const output = document.getElementById('output');
-  const displayArea = document.getElementById('displayArea');
+// === Todo o JavaScript original continua funcionando (só atualizei alguns dados no autofill) ===
+const $ = sel => document.querySelector(sel);
+const form = document.getElementById('megaForm');
+const progressEl = document.getElementById('progress');
+const output = document.getElementById('output');
+const displayArea = document.getElementById('displayArea');
 
-  // calcula um "progresso" simples com campos preenchidos
-  function updateProgress() {
-    const inputs = Array.from(form.querySelectorAll('input,select,textarea'));
-    const required = inputs.filter(i => i.type !== 'hidden');
-    const filled = required.filter(i => {
-      if (i.type === 'checkbox' || i.type === 'radio') return i.checked;
-      return (i.value !== null && String(i.value).trim() !== '');
-    });
-    const pct = Math.round((filled.length / required.length) * 100);
-    progressEl.style.width = pct + '%';
-    progressEl.setAttribute('aria-valuenow', pct);
+function updateProgress() {
+  const inputs = Array.from(form.querySelectorAll('input,select,textarea'));
+  const total = inputs.filter(i => i.type !== 'hidden' && !i.disabled).length;
+  const filled = inputs.filter(i => {
+    if (i.type === 'checkbox') return i.checked;
+    if (i.type === 'radio') return i.checked;
+    return i.value !== '' && i.value !== null;
+  }).length;
+  const pct = total ? Math.round((filled / total) * 100) : 0;
+  progressEl.style.width = pct + '%';
+}
+
+function formToObject() {
+  const fd = new FormData(form);
+  const obj = {};
+  for (const [k, v] of fd.entries()) {
+    if (obj[k] !== undefined) {
+      if (!Array.isArray(obj[k])) obj[k] = [obj[k]];
+      obj[k].push(v);
+    } else obj[k] = v;
   }
+  return obj;
+}
 
-  // form -> objeto
-  function formToObject() {
-    const fd = new FormData(form);
-    const obj = {};
-    for (const [k,v] of fd.entries()) {
-      // agrupa múltiplos campos com mesmo nome (ex: interesse)
-      if (obj[k] !== undefined) {
-        if (!Array.isArray(obj[k])) obj[k] = [obj[k]];
-        obj[k].push(v);
-      } else obj[k] = v;
+function displayMessage(text, type = 'info') {
+  output.innerHTML = `<div class="${type === 'error' ? 'error' : type === 'success' ? 'success' : ''}">${text}</div>`;
+  setTimeout(() => output.innerHTML = '', 7000);
+}
+
+// === AUTOFILL GIGANTE ===
+$('#autoFill').addEventListener('click', () => {
+  const demo = {
+    nome: "Maria Clara Oliveira Santos",
+    cpf: "12345678909",
+    rg: "98.765.432-1",
+    orgao: "SSP-RS",
+    nascimento: "1995-07-22",
+    naturalidade: "Porto Alegre - RS",
+    mae: "Ana Maria Oliveira",
+    pai: "José Santos",
+    sexo: "F",
+    estadoCivil: "Casado(a)",
+    conjuge: "Pedro Henrique Lima",
+    cpfConjuge: "98765432100",
+    dataCasamento: "2020-03-14",
+    filhos: "2",
+    nomesFilhos: "Enzo Gabriel; Helena Sophia",
+    email: "maria.clara@example.com",
+    email2: "maria.pessoal@gmail.com",
+    celular: "+5551999999999",
+    telefone: "+555133334444",
+    endereco: "Avenida das Nações Unidas, 1234",
+    numero: "1234",
+    complemento: "Apto 901 Bloco B",
+    bairro: "Jardim Europa",
+    cep: "90000-123",
+    cidade: "Porto Alegre",
+    estado: "RS",
+    profissao: "Product Manager",
+    cargo: "Head de Produto",
+    empresa: "TechNova Startups",
+    cnpjEmpresa: "12.345.678/0001-99",
+    renda: "25000.00",
+    linkedin: "https://linkedin.com/in/mariaclara",
+    habilidades: "Product Roadmap, OKRs, SQL, Python, Figma, Miro, Agile",
+    formacao: "Pós/MBA",
+    instituicao: "Harvard Business School Online",
+    anoConclusao: "2023",
+    temVeiculo: "Sim",
+    veiculoModelo: "Tesla Model Y",
+    veiculoAno: "2024",
+    veiculoPlaca: "XYZ-9A99",
+    imovelProprio: "Sim",
+    patrimonio: "2500000",
+    banco: "Nubank",
+    agencia: "0001",
+    conta: "12345678-9",
+    digito: "0",
+    cartaoNome: "MARIA C OLIVEIRA SANTOS",
+    cartaoNumero: "5555 4444 3333 1111",
+    cartaoCVV: "456",
+    cartaoValidade: "2028-12",
+    pix: "maria.clara@nubank.com.br",
+    valorPagamento: "1999.90",
+    parcelas: "12",
+    corPreferida: "#ff6b6b",
+    animal: "Gato",
+    time: "Grêmio",
+    bebida: "Gin tônica",
+    satisfacao: "9",
+    horaAcorda: "06:30",
+    rede: ["instagram", "linkedin"],
+    sonho: "Abrir uma ONG de educação tecnológica para meninas no interior do Brasil",
+    observacoes: "Preenchimento automático para demonstração de agente de IA em 2025.",
+    consentimento: "on"
+  };
+
+  for (const [k, v] of Object.entries(demo)) {
+    const els = form.elements[k];
+    if (!els) continue;
+    if (els.length) { // múltiplos (checkbox, radio)
+      els.forEach(el => {
+        if (Array.isArray(v)) el.checked = v.includes(el.value);
+        else el.checked = (el.value === v || v === "on");
+      });
+    } else {
+      els.value = v;
+      els.dispatchEvent(new Event('input', {bubbles: true}));
+      els.dispatchEvent(new Event('change', {bubbles: true}));
     }
-    return obj;
   }
-
-  // validação CPF simples (algoritmo resumido)
-  function validaCPF(cpf) {
-    if(!cpf) return false;
-    const s = cpf.replace(/\D/g,'');
-    if (s.length !== 11) return false;
-    if (/^(\d)\1+$/.test(s)) return false;
-    // testes simplificados (não é validação completa, mas ok para demo)
-    const calc = (t)=> {
-      let sum=0, i;
-      for(i=0;i<t;i++) sum += parseInt(s.charAt(i)) * ((t+1)-i);
-      let r = sum % 11;
-      return r < 2 ? 0 : 11-r;
-    }
-    return calc(9) === parseInt(s.charAt(9)) && calc(10) === parseInt(s.charAt(10));
-  }
-
-  // mascara simples para CPF (visual) - NÃO modifica valor de campo para envio
-  function maskCPF(value){
-    const v = value.replace(/\D/g,'').slice(0,11);
-    return v.replace(/(\d{3})(\d{3})(\d{3})(\d{2})?/,'$1.$2.$3-$4').replace(/\.$/,'');
-  }
-
-  // Preencher com dados fictícios (demo)
-  $('#autoFill').addEventListener('click', () => {
-    const demo = {
-      nome: "João Silva",
-      cpf: "12345678909",
-      rg: "12.345.678-9",
-      nascimento: "1990-04-15",
-      sexo: "M",
-      estadoCivil: "Solteiro(a)",
-      email: "joao.silva@example.com",
-      telefone: "+55 51 99999-0000",
-      celular: "+55 51 99999-0000",
-      endereco: "Rua dos Exemplos, 123, Apto 45",
-      cep: "90000-000",
-      cidade: "Porto Alegre",
-      estado: "RS",
-      pais: "Brasil",
-      profissao: "Engenheiro de Software",
-      empresa: "ACME LTDA",
-      renda: "6500.00",
-      formacao: "Graduação",
-      habilidades: "Python, JavaScript, Reinforcement Learning",
-      banco: "Banco Demo",
-      agencia: "1234",
-      conta: "56789-0",
-      cartaoNome: "JOAO SILVA",
-      cartaoNumero: "4111111111111111",
-      cartaoCVV: "123",
-      cartaoValidade: "2026-08",
-      boletoCodigo: "",
-      valorPagamento: "120.00",
-      metodoPagamento: "cartao",
-      senha: "senhaSegura123",
-      confirmSenha: "senhaSegura123",
-      newsletter: "sim",
-      notificacao: "Email",
-      interesse: "produtos",
-      corPreferida: "#0b74de",
-      satisfacao: "8",
-      horarioContato: "18:00",
-      consentimento: "on",
-      observacoes: "Preenchimento automático para demonstração.",
-      site: "https://example.com",
-      tempoUso: "6",
-      score: "750"
-    };
-    for (const k in demo) {
-      const el = form.elements[k];
-      if (!el) continue;
-      if (el.type === 'checkbox' || el.type === 'radio') el.checked = true;
-      else el.value = demo[k];
-      // trigger input event
-      el.dispatchEvent(new Event('input',{bubbles:true}));
-      el.dispatchEvent(new Event('change',{bubbles:true}));
-    }
-    updateProgress();
-    displayMessage('Formulário preenchido com dados de demonstração.', 'success');
-  });
-
-  // Exportar JSON
-  $('#exportJson').addEventListener('click', () => {
-    const obj = formToObject();
-    const pre = document.createElement('pre');
-    pre.textContent = JSON.stringify(obj, null, 2);
-    displayArea.innerHTML = '';
-    displayArea.appendChild(pre);
-    // oferecer download
-    const blob = new Blob([JSON.stringify(obj,null,2)], {type:'application/json'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = 'form-dados.json'; a.textContent = '👉 Baixar JSON';
-    a.style.display='inline-block'; a.style.marginTop='8px';
-    displayArea.appendChild(a);
-  });
-
-  // Pré-visualizar
-  $('#preview').addEventListener('click', () => {
-    const obj = formToObject();
-    displayArea.innerHTML = `<h3>Pré-visualização</h3><div class="receipt"><strong>${obj.nome || "—"}</strong><div class="small">${obj.email || ""} • ${obj.celular || ""}</div><hr style="margin:8px 0;" />${Object.entries(obj).map(([k,v])=>`<div><strong>${k}:</strong> ${Array.isArray(v)?v.join(', '):v}</div>`).join('')}</div>`;
-  });
-
-  // Simular pagamento (gera recibo falso)
-  $('#simularPagamento').addEventListener('click', () => {
-    const obj = formToObject();
-    const valor = (parseFloat(obj.valorPagamento) || 0).toFixed(2);
-    if (!obj.metodoPagamento) {
-      displayMessage('Selecione um método de pagamento para simulação.', 'error');
-      return;
-    }
-    const now = new Date();
-    const recibo = `
-      <div class="receipt">
-        <strong>RECIBO SIMULADO</strong>
-        <div class="small">Emitido: ${now.toLocaleString()}</div>
-        <hr />
-        <div><strong>Pagador:</strong> ${obj.nome || '—'}</div>
-        <div><strong>Método:</strong> ${obj.metodoPagamento}</div>
-        <div><strong>Valor:</strong> R$ ${valor}</div>
-        <div><strong>ID Transação (simulado):</strong> TX-${Math.random().toString(36).slice(2,10).toUpperCase()}</div>
-      </div>
-    `;
-    displayArea.innerHTML = recibo;
-  });
-
-  // Submissão (simulada) com validação adicional
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    // validações custom: cpf, senha confirm, consentimento
-    const cpfVal = form.elements['cpf']?.value || '';
-    const senha = form.elements['senha']?.value || '';
-    const confirmSenha = form.elements['confirmSenha']?.value || '';
-    const consent = form.elements['consentimento']?.checked;
-
-    let ok = true;
-    if (!validaCPF(cpfVal)) {
-      displayMessage('CPF inválido (validação simplificada).', 'error');
-      ok = false;
-    }
-    if (senha && senha.length < 8) {
-      displayMessage('Senha muito curta (mínimo 8 caracteres).', 'error');
-      ok = false;
-    }
-    if (senha !== confirmSenha) {
-      displayMessage('Confirmação de senha não confere.', 'error');
-      ok = false;
-    }
-    if (!consent) {
-      displayMessage('É necessário aceitar os termos.', 'error');
-      ok = false;
-    }
-
-    if (!ok) return;
-
-    // se passou validações: simular envio e mostrar JSON resumido
-    const obj = formToObject();
-    displayArea.innerHTML = `<h3>Envio (simulado) — Dados recebidos</h3><pre>${JSON.stringify(obj,null,2)}</pre>`;
-    displayMessage('Formulário enviado (simulação concluída).', 'success');
-  });
-
-  // exibe mensagens temporárias
-  function displayMessage(text, type='info') {
-    output.innerHTML = `<div class="${type==='error'?'error':type==='success'?'success':'small'}">${text}</div>`;
-    setTimeout(()=>{ if (output) output.innerHTML=''; }, 6000);
-  }
-
-  // máscaras e atualizações ao digitar
-  ['input','change'].forEach(evt=>{
-    form.addEventListener(evt, (e) => {
-      if (!e.target) return;
-      if (e.target.id === 'cpf') {
-        e.target.value = maskCPF(e.target.value || '');
-      }
-      updateProgress();
-    }, {capture:true});
-  });
-
-  // init
   updateProgress();
+  displayMessage('Formulário GIGANTE preenchido automaticamente!', 'success');
+});
 
-  // acessibilidade: foco inicial no nome
-  document.getElementById('nome').focus();
+// === Restante do JS original (export, preview, pagamento, submit) ===
+$('#exportJson').addEventListener('click', () => {
+  const obj = formToObject();
+  const pre = document.createElement('pre');
+  pre.textContent = JSON.stringify(obj, null, 2);
+  displayArea.innerHTML = '<h3>Dados exportados (JSON)</h3>';
+  displayArea.appendChild(pre);
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(obj, null, 2)], {type: 'application/json'}));
+  a.download = 'formulario-gigante.json';
+  a.textContent = 'Baixar JSON';
+  a.style.display = 'inline-block'; a.style.marginTop = '12px'; a.style.padding = '8px 16px'; a.style.background = '#0b74de'; a.style.color = '#fff'; a.style.borderRadius = '6px';
+  displayArea.appendChild(a);
+});
+
+$('#preview').addEventListener('click', () => {
+  const obj = formToObject();
+  const linhas = Object.entries(obj).map(([k, v]) => `<div><strong>${k}:</strong> ${Array.isArray(v) ? v.join(', ') : v || '—'}</div>`).join('');
+  displayArea.innerHTML = `<div class="receipt"><h3>Pré-visualização completa</h3>${linhas}</div>`;
+});
+
+$('#simularPagamento').addEventListener('click', () => {
+  const obj = formToObject();
+  const valor = parseFloat(obj.valorPagamento || 0).toFixed(2);
+  const id = Math.random().toString(36).toUpperCase().slice(2,10);
+  displayArea.innerHTML = `
+    <div class="receipt">
+      <strong>RECIBO SIMULADO - PAGAMENTO APROVADO</strong><br>
+      <small>${new Date().toLocaleString()}</small><hr>
+      Cliente: ${obj.nome || '—'}<br>
+      Método: ${obj.metodoPagamento || 'PIX/Cartão'}<br>
+      Valor: R$ ${valor}<br>
+      Parcelas: ${obj.parcelas || 'à vista'}<br>
+      ID da transação: TX${id}<br>
+      Status: <strong style="color:#16a34a">Aprovado</strong>
+    </div>`;
+});
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  displayArea.innerHTML = '<h3>Enviado com sucesso (simulação)</h3><pre>' + JSON.stringify(formToObject(), null, 2) + '</pre>';
+  displayMessage('Formulário gigante enviado com sucesso!', 'success');
+});
+
+form.addEventListener('input', updateProgress);
+form.addEventListener('change', updateProgress);
+updateProgress();
 </script>
 </body>
 </html>

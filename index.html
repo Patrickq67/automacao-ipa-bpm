@@ -35,7 +35,6 @@
       transition: 0.3s ease;
     }
 
-    /* NOVO — fundo verde/vermelho inteiro */
     .correct-full {
       background: #c8f7c5 !important;
       border-left: 8px solid #4CAF50 !important;
@@ -65,7 +64,7 @@
       display: block;
       width: 100%;
       max-width: 300px;
-      margin: 30px auto 40px;
+      margin: 30px auto 10px;
       padding: 12px;
       background: #2196F3;
       color: white;
@@ -79,14 +78,30 @@
     button:hover {
       background: #1976D2;
     }
+
+    #botaoProximo {
+      background: #4CAF50;
+      margin-top: 10px;
+    }
+
+    #botaoProximo:hover {
+      background: #3e8e41;
+    }
   </style>
 </head>
+
 <body>
 
   <h1>Quiz sobre RPA e IPA</h1>
 
   <form id="quizForm"></form>
+
   <button onclick="verificarRespostas()">Finalizar</button>
+
+  <!-- BOTÃO PRÓXIMO QUE ABRE form.html -->
+  <button id="botaoProximo" onclick="window.location.href='form.html'">
+    Próximo ➜
+  </button>
 
   <script>
     const perguntas = [
@@ -140,7 +155,6 @@
 
         const div = document.getElementById("q" + index);
 
-        // limpar antes
         div.classList.remove("correct-full", "incorrect-full");
 
         if (resposta === pergunta.correta) {
@@ -150,7 +164,6 @@
         }
       });
 
-      // Questão da imagem
       const respostaImagem = document.querySelector('input[name="qImagem"]:checked');
       const divImagem = document.getElementById("qImagem");
 
@@ -165,5 +178,4 @@
   </script>
 
 </body>
-
 </html>

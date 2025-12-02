@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Formulário Extenso — Demonstração IPA/Agentes de IA</title>
+<style>
+  :root{
+    --bg:#f6f8fa; --card:#ffffff; --accent:#0b74de; --muted:#6b7280;
+    --danger:#dc2626; --success:#16a34a;
+  }
+  body{font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:#111;margin:0;padding:24px;}
+  .container{max-width:1100px;margin:0 auto;}
+  header{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+  h1{font-size:1.4rem;margin:0}
+  small{color:var(--muted)}
+  form.card{background:var(--card);border-radius:12px;padding:20px;box-shadow:0 6px 24px rgba(11,20,40,0.06)}
+  fieldset{border:1px solid #e6e9ee;padding:14px;margin-bottom:12px;border-radius:8px}
+  legend{font-weight:600;padding:0 8px}
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}
+  .col-12{grid-column:span 12}
+  .col-6{grid-column:span 6}
+  .col-4{grid-column:span 4}
+  .col-3{grid-column:span 3}
+  label{display:block;font-size:0.85rem;margin-bottom:6px}
+  input[type="text"], input[type="email"], input[type="tel"], input[type="number"], input[type="password"], select, textarea, input[type="url"], input[type="date"], input[type="time"], input[type="month"]{
+    width:100%;padding:10px;border-radius:8px;border:1px solid #dbe3ef;background:#fff;box-sizing:border-box;
+  }
+  textarea{min-height:90px;resize:vertical}
+  .help{font-size:0.8rem;color:var(--muted);margin-top:6px}
+  .row{display:flex;gap:8px}
+  .btn{display:inline-block;padding:10px 14px;border-radius:8px;border:0;background:var(--accent);color:#fff;cursor:pointer}
+  .btn.secondary{background:#eef2f7;color:#111}
+  .btn.ghost{background:transparent;border:1px solid #e6e9ee;color:var(--muted)}
+  .error{color:var(--danger);font-size:0.85rem;margin-top:6px}
+  .success{color:var(--success)}
+  .small{font-size:0.85rem}
+  .progress-wrap{background:#e9eef8;border-radius:999px;padding:4px;margin-bottom:12px}
+  .progress{height:10px;background:linear-gradient(90deg,var(--accent),#4facfe);border-radius:999px;width:0%}
+  footer{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:12px;flex-wrap:wrap}
+  @media (max-width:900px){
+    .col-6{grid-column:span 12}
+    .col-4{grid-column:span 12}
+    .col-3{grid-column:span 12}
+  }
+
+  /* small visual for simulated receipt */
+  .receipt{background:#f8fafc;border:1px dashed #dbeafe;padding:12px;border-radius:8px;margin-top:12px}
+  .kbd{background:#111;color:#fff;padding:4px 6px;border-radius:6px;font-size:0.75rem}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div>
+      <h1>Formulário Extenso — Demonstração</h1>
+      <small>Use este formulário para demonstrações ao vivo: preenchimento automático, exportação JSON, simulação de pagamento e validação.</small>
+    </div>
+  </header>
+
+  <form id="megaForm" class="card" autocomplete="on" novalidate>
+    <div class="progress-wrap" aria-hidden="true" title="Progresso de preenchimento">
+      <div id="progress" class="progress" style="width:0%"></div>
+    </div>
+
+    <!-- Identificação Pessoal -->
+    <fieldset>
+      <legend>1 — Identificação Pessoal</legend>
+      <div class="grid">
+        <div class="col-4">
+          <label for="nome">Nome completo <span aria-hidden="true">*</span></label>
+          <input id="nome" name="nome" type="text" required placeholder="Nome Sobrenome" />
+          <div class="help">Nome como em documentos oficiais.</div>
+        </div>
+
+        <div class="col-4">
+          <label for="cpf">CPF <span aria-hidden="true">*</span></label>
+          <input id="cpf" name="cpf" type="text" inputmode="numeric" pattern="\d{11}" maxlength="14" placeholder="00000000000" required />
+          <div class="help">Apenas dígitos (validação simples aplicada).</div>
+        </div>
+
+        <div class="col-4">
+          <label for="rg">RG / Documento</label>
+          <input id="rg" name="rg" type="text" />
+        </div>
+
+        <div class="col-4">
+          <label for="nascimento">Data de Nascimento</label>
+          <input id="nascimento" name="nascimento" type="date" />
+        </div>
+
+        <div class="col-4">
+          <label for="sexo">Sexo</label>
+          <select id="sexo" name="sexo">
+            <option value="">— selecione —</option>
+            <option value="M">Masculino</option>
+            <option value="F">Feminino</option>
+            <option value="O">Outro / Prefiro não informar</option>
+          </select>
+        </div>
+
+        <div class="col-4">
+          <label for="estadoCivil">Estado Civil</label>
+          <select id="estadoCivil" name="estadoCivil">
+            <option value="">— —</option>
+            <option>Solteiro(a)</option>
+            <option>Casado(a)</option>
+            <option>União Estável</option>
+            <option>Divorciado(a)</option>
+            <option>Viúvo(a)</option>
+          </select>
+        </div>
+
+      </div>
+    </fieldset>
+
+    <!-- Contato -->
+    <fieldset>
+      <legend>2 — Contato</legend>
+      <div class="grid">
+        <div class="col-4">
+          <label for="email">Email <span aria-hidden="true">*</span></label>
+          <input id="email" name="email" type="email" required placeholder="seu@exemplo.com" />
+        </div>
+
+        <div class="col-4">
+          <label for="telefone">Telefone</label>
+          <input id="telefone" name="telefone" type="tel" placeholder="+55 (51) 9XXXX-XXXX" />
+        </div>
+
+        <div class="col-4">
+          <label for="celular">Celular (WhatsApp)</label>
+          <input id="celular" name="celular" type="tel" placeholder="+55..." />
+        </div>
+
+        <div class="col-12">
+          <label for="endereco">Endereço completo</label>
+          <input id="endereco" name="endereco" type="text" placeholder="Rua, Número, Complemento" />
+        </div>
+
+        <div class="col-3">
+          <label for="cep">CEP</label>
+          <input id="cep" name="cep" type="text" maxlength="9" inputmode="numeric" placeholder="00000-000" />
+        </div>
+
+        <div class="col-3">
+          <label for="cidade">Cidade</label>
+          <input id="cidade" name="cidade" type="text" />
+        </div>
+
+        <div class="col-3">
+          <label for="estado">Estado</label>
+          <select id="estado" name="estado">
+            <option value="">UF</option>
+            <option>RS</option><option>SP</option><option>RJ</option><option>SC</option>
+            <!-- mais estados... -->
+          </select>
+        </div>
+
+        <div class="col-3">
+          <label for="pais">País</label>
+          <input id="pais" name="pais" type="text" value="Brasil" />
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Profissional -->
+    <fieldset>
+      <legend>3 — Profissional / Escolar</legend>
+      <div class="grid">
+        <div class="col-6">
+          <label for="profissao">Profissão / Cargo</label>
+          <input id="profissao" name="profissao" type="text" />
+        </div>
+
+        <div class="col-3">
+          <label for="empresa">Empresa</label>
+          <input id="empresa" name="empresa" type="text" />
+        </div>
+
+        <div class="col-3">
+          <label for="renda">Renda mensal (R$)</label>
+          <input id="renda" name="renda" type="number" min="0" step="0.01" />
+        </div>
+
+        <div class="col-4">
+          <label for="formacao">Formação</label>
+          <select id="formacao" name="formacao" multiple size="4" aria-describedby="formacaoHelp">
+            <option>Ensino Médio</option><option>Técnico</option><option>Graduação</option><option>Pós-graduação</option><option>Mestrado</option><option>Doutorado</option>
+          </select>
+          <div id="formacaoHelp" class="help">Selecione múltiplas com Ctrl/Cmd + clique.</div>
+        </div>
+
+        <div class="col-8">
+          <label for="habilidades">Habilidades / Competências</label>
+          <input id="habilidades" name="habilidades" type="text" placeholder="ex: Python, SQL, Atendimento ao cliente" />
+          <div class="help">Separe por vírgula.</div>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Financeiro e pagamentos -->
+    <fieldset>
+      <legend>4 — Financeiro / Pagamento (Simulado)</legend>
+      <div class="grid">
+
+        <div class="col-4">
+          <label for="banco">Banco</label>
+          <input id="banco" name="banco" type="text" />
+        </div>
+
+        <div class="col-4">
+          <label for="agencia">Agência</label>
+          <input id="agencia" name="agencia" type="text" />
+        </div>
+
+        <div class="col-4">
+          <label for="conta">Conta</label>
+          <input id="conta" name="conta" type="text" />
+        </div>
+
+        <div class="col-6">
+          <label for="cartaoNome">Nome no cartão</label>
+          <input id="cartaoNome" name="cartaoNome" type="text" />
+        </div>
+
+        <div class="col-3">
+          <label for="cartaoNumero">Número do cartão</label>
+          <input id="cartaoNumero" name="cartaoNumero" type="text" maxlength="19" placeholder="0000 0000 0000 0000" />
+        </div>
+
+        <div class="col-1">
+          <label for="cartaoCVV">CVV</label>
+          <input id="cartaoCVV" name="cartaoCVV" type="password" maxlength="4" placeholder="123" />
+        </div>
+
+        <div class="col-2">
+          <label for="cartaoValidade">Validade</label>
+          <input id="cartaoValidade" name="cartaoValidade" type="month" />
+        </div>
+
+        <div class="col-4">
+          <label for="boletoCodigo">Código de boleto</label>
+          <input id="boletoCodigo" name="boletoCodigo" type="text" placeholder="Simulado - 44 dígitos" />
+          <div class="help">Use este campo para simular leitura de boleto.</div>
+        </div>
+
+        <div class="col-4">
+          <label for="valorPagamento">Valor (R$)</label>
+          <input id="valorPagamento" name="valorPagamento" type="number" min="0" step="0.01" />
+        </div>
+
+        <div class="col-4">
+          <label for="metodoPagamento">Método de pagamento</label>
+          <select id="metodoPagamento" name="metodoPagamento">
+            <option value="">— selecione —</option>
+            <option value="cartao">Cartão (simulado)</option>
+            <option value="boleto">Boleto (simulado)</option>
+            <option value="pix">PIX (simulado)</option>
+            <option value="transferencia">Transferência bancária (simulado)</option>
+          </select>
+        </div>
+
+      </div>
+    </fieldset>
+
+    <!-- Preferências e segurança -->
+    <fieldset>
+      <legend>5 — Preferências, Segurança e Consentimento</legend>
+      <div class="grid">
+        <div class="col-6">
+          <label for="senha">Senha (ex.: conta)</label>
+          <input id="senha" name="senha" type="password" minlength="8" />
+          <div class="help">Mínimo 8 caracteres.</div>
+        </div>
+
+        <div class="col-6">
+          <label for="confirmSenha">Confirmar senha</label>
+          <input id="confirmSenha" name="confirmSenha" type="password" minlength="8" />
+        </div>
+
+        <div class="col-3">
+          <label for="newsletter">Receber newsletter?</label>
+          <select id="newsletter" name="newsletter" aria-label="Receber newsletter">
+            <option value="sim">Sim</option><option value="nao">Não</option>
+          </select>
+        </div>
+
+        <div class="col-3">
+          <label for="notificacao">Notificações por</label>
+          <select id="notificacao" name="notificacao">
+            <option>Email</option><option>SMS</option><option>Push</option><option>WhatsApp</option>
+          </select>
+        </div>
+
+        <div class="col-6">
+          <label>Interesses</label>
+          <div class="row">
+            <label><input type="checkbox" name="interesse" value="produtos" /> Produtos</label>
+            <label><input type="checkbox" name="interesse" value="servicos" /> Serviços</label>
+            <label><input type="checkbox" name="interesse" value="parcerias" /> Parcerias</label>
+          </div>
+        </div>
+
+        <div class="col-4">
+          <label for="corPreferida">Cor preferida (UI)</label>
+          <input id="corPreferida" name="corPreferida" type="color" value="#0b74de" />
+        </div>
+
+        <div class="col-4">
+          <label for="satisfacao">Satisfação (0-10)</label>
+          <input id="satisfacao" name="satisfacao" type="range" min="0" max="10" step="1" />
+        </div>
+
+        <div class="col-4">
+          <label for="horarioContato">Horário preferido para contato</label>
+          <input id="horarioContato" name="horarioContato" type="time" />
+        </div>
+
+        <div class="col-12">
+          <label for="consentimento">
+            <input id="consentimento" name="consentimento" type="checkbox" required />
+            Eu concordo com os termos e políticas (simulado).
+          </label>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Uploads e anexos -->
+    <fieldset>
+      <legend>6 — Documentos / Anexos</legend>
+      <div class="grid">
+        <div class="col-6">
+          <label for="cv">Currículo (PDF)</label>
+          <input id="cv" name="cv" type="file" accept=".pdf,.doc,.docx" />
+        </div>
+
+        <div class="col-6">
+          <label for="foto">Foto (PNG/JPG)</label>
+          <input id="foto" name="foto" type="file" accept="image/*" />
+        </div>
+
+        <div class="col-12">
+          <label for="observacoes">Observações / Mensagem</label>
+          <textarea id="observacoes" name="observacoes" placeholder="Algo que queira adicionar..."></textarea>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Dados extras e UX -->
+    <fieldset>
+      <legend>7 — Dados extras / Telemetria (opcional)</legend>
+      <div class="grid">
+        <div class="col-4">
+          <label for="site">Site pessoal / LinkedIn</label>
+          <input id="site" name="site" type="url" placeholder="https://..." />
+        </div>
+
+        <div class="col-4">
+          <label for="tempoUso">Tempo de uso estimado do serviço (meses)</label>
+          <input id="tempoUso" name="tempoUso" type="number" min="0" />
+        </div>
+
+        <div class="col-4">
+          <label for="score">Score interno (0-1000)</label>
+          <input id="score" name="score" type="number" min="0" max="1000" />
+        </div>
+      </div>
+    </fieldset>
+
+    <footer>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button type="button" id="autoFill" class="btn ghost">Preencher (simulado)</button>
+        <button type="button" id="exportJson" class="btn secondary">Exportar JSON</button>
+        <button type="button" id="preview" class="btn">Pré-visualizar</button>
+        <button type="button" id="simularPagamento" class="btn">Simular Pagamento</button>
+      </div>
+
+      <div style="display:flex;gap:8px">
+        <button type="reset" class="btn ghost">Limpar</button>
+        <button type="submit" class="btn">Enviar (simulado)</button>
+      </div>
+    </footer>
+
+    <div id="output" aria-live="polite"></div>
+  </form>
+
+  <!-- Area para exibir JSON / recibo -->
+  <div id="displayArea" style="margin-top:18px"></div>
+</div>
+
+<script>
+  // ----- Utilitários -----
+  const $ = sel => document.querySelector(sel);
+  const form = document.getElementById('megaForm');
+  const progressEl = document.getElementById('progress');
+  const output = document.getElementById('output');
+  const displayArea = document.getElementById('displayArea');
+
+  // calcula um "progresso" simples com campos preenchidos
+  function updateProgress() {
+    const inputs = Array.from(form.querySelectorAll('input,select,textarea'));
+    const required = inputs.filter(i => i.type !== 'hidden');
+    const filled = required.filter(i => {
+      if (i.type === 'checkbox' || i.type === 'radio') return i.checked;
+      return (i.value !== null && String(i.value).trim() !== '');
+    });
+    const pct = Math.round((filled.length / required.length) * 100);
+    progressEl.style.width = pct + '%';
+    progressEl.setAttribute('aria-valuenow', pct);
+  }
+
+  // form -> objeto
+  function formToObject() {
+    const fd = new FormData(form);
+    const obj = {};
+    for (const [k,v] of fd.entries()) {
+      // agrupa múltiplos campos com mesmo nome (ex: interesse)
+      if (obj[k] !== undefined) {
+        if (!Array.isArray(obj[k])) obj[k] = [obj[k]];
+        obj[k].push(v);
+      } else obj[k] = v;
+    }
+    return obj;
+  }
+
+  // validação CPF simples (algoritmo resumido)
+  function validaCPF(cpf) {
+    if(!cpf) return false;
+    const s = cpf.replace(/\D/g,'');
+    if (s.length !== 11) return false;
+    if (/^(\d)\1+$/.test(s)) return false;
+    // testes simplificados (não é validação completa, mas ok para demo)
+    const calc = (t)=> {
+      let sum=0, i;
+      for(i=0;i<t;i++) sum += parseInt(s.charAt(i)) * ((t+1)-i);
+      let r = sum % 11;
+      return r < 2 ? 0 : 11-r;
+    }
+    return calc(9) === parseInt(s.charAt(9)) && calc(10) === parseInt(s.charAt(10));
+  }
+
+  // mascara simples para CPF (visual) - NÃO modifica valor de campo para envio
+  function maskCPF(value){
+    const v = value.replace(/\D/g,'').slice(0,11);
+    return v.replace(/(\d{3})(\d{3})(\d{3})(\d{2})?/,'$1.$2.$3-$4').replace(/\.$/,'');
+  }
+
+  // Preencher com dados fictícios (demo)
+  $('#autoFill').addEventListener('click', () => {
+    const demo = {
+      nome: "João Silva",
+      cpf: "12345678909",
+      rg: "12.345.678-9",
+      nascimento: "1990-04-15",
+      sexo: "M",
+      estadoCivil: "Solteiro(a)",
+      email: "joao.silva@example.com",
+      telefone: "+55 51 99999-0000",
+      celular: "+55 51 99999-0000",
+      endereco: "Rua dos Exemplos, 123, Apto 45",
+      cep: "90000-000",
+      cidade: "Porto Alegre",
+      estado: "RS",
+      pais: "Brasil",
+      profissao: "Engenheiro de Software",
+      empresa: "ACME LTDA",
+      renda: "6500.00",
+      formacao: "Graduação",
+      habilidades: "Python, JavaScript, Reinforcement Learning",
+      banco: "Banco Demo",
+      agencia: "1234",
+      conta: "56789-0",
+      cartaoNome: "JOAO SILVA",
+      cartaoNumero: "4111111111111111",
+      cartaoCVV: "123",
+      cartaoValidade: "2026-08",
+      boletoCodigo: "",
+      valorPagamento: "120.00",
+      metodoPagamento: "cartao",
+      senha: "senhaSegura123",
+      confirmSenha: "senhaSegura123",
+      newsletter: "sim",
+      notificacao: "Email",
+      interesse: "produtos",
+      corPreferida: "#0b74de",
+      satisfacao: "8",
+      horarioContato: "18:00",
+      consentimento: "on",
+      observacoes: "Preenchimento automático para demonstração.",
+      site: "https://example.com",
+      tempoUso: "6",
+      score: "750"
+    };
+    for (const k in demo) {
+      const el = form.elements[k];
+      if (!el) continue;
+      if (el.type === 'checkbox' || el.type === 'radio') el.checked = true;
+      else el.value = demo[k];
+      // trigger input event
+      el.dispatchEvent(new Event('input',{bubbles:true}));
+      el.dispatchEvent(new Event('change',{bubbles:true}));
+    }
+    updateProgress();
+    displayMessage('Formulário preenchido com dados de demonstração.', 'success');
+  });
+
+  // Exportar JSON
+  $('#exportJson').addEventListener('click', () => {
+    const obj = formToObject();
+    const pre = document.createElement('pre');
+    pre.textContent = JSON.stringify(obj, null, 2);
+    displayArea.innerHTML = '';
+    displayArea.appendChild(pre);
+    // oferecer download
+    const blob = new Blob([JSON.stringify(obj,null,2)], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'form-dados.json'; a.textContent = '👉 Baixar JSON';
+    a.style.display='inline-block'; a.style.marginTop='8px';
+    displayArea.appendChild(a);
+  });
+
+  // Pré-visualizar
+  $('#preview').addEventListener('click', () => {
+    const obj = formToObject();
+    displayArea.innerHTML = `<h3>Pré-visualização</h3><div class="receipt"><strong>${obj.nome || "—"}</strong><div class="small">${obj.email || ""} • ${obj.celular || ""}</div><hr style="margin:8px 0;" />${Object.entries(obj).map(([k,v])=>`<div><strong>${k}:</strong> ${Array.isArray(v)?v.join(', '):v}</div>`).join('')}</div>`;
+  });
+
+  // Simular pagamento (gera recibo falso)
+  $('#simularPagamento').addEventListener('click', () => {
+    const obj = formToObject();
+    const valor = (parseFloat(obj.valorPagamento) || 0).toFixed(2);
+    if (!obj.metodoPagamento) {
+      displayMessage('Selecione um método de pagamento para simulação.', 'error');
+      return;
+    }
+    const now = new Date();
+    const recibo = `
+      <div class="receipt">
+        <strong>RECIBO SIMULADO</strong>
+        <div class="small">Emitido: ${now.toLocaleString()}</div>
+        <hr />
+        <div><strong>Pagador:</strong> ${obj.nome || '—'}</div>
+        <div><strong>Método:</strong> ${obj.metodoPagamento}</div>
+        <div><strong>Valor:</strong> R$ ${valor}</div>
+        <div><strong>ID Transação (simulado):</strong> TX-${Math.random().toString(36).slice(2,10).toUpperCase()}</div>
+      </div>
+    `;
+    displayArea.innerHTML = recibo;
+  });
+
+  // Submissão (simulada) com validação adicional
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // validações custom: cpf, senha confirm, consentimento
+    const cpfVal = form.elements['cpf']?.value || '';
+    const senha = form.elements['senha']?.value || '';
+    const confirmSenha = form.elements['confirmSenha']?.value || '';
+    const consent = form.elements['consentimento']?.checked;
+
+    let ok = true;
+    if (!validaCPF(cpfVal)) {
+      displayMessage('CPF inválido (validação simplificada).', 'error');
+      ok = false;
+    }
+    if (senha && senha.length < 8) {
+      displayMessage('Senha muito curta (mínimo 8 caracteres).', 'error');
+      ok = false;
+    }
+    if (senha !== confirmSenha) {
+      displayMessage('Confirmação de senha não confere.', 'error');
+      ok = false;
+    }
+    if (!consent) {
+      displayMessage('É necessário aceitar os termos.', 'error');
+      ok = false;
+    }
+
+    if (!ok) return;
+
+    // se passou validações: simular envio e mostrar JSON resumido
+    const obj = formToObject();
+    displayArea.innerHTML = `<h3>Envio (simulado) — Dados recebidos</h3><pre>${JSON.stringify(obj,null,2)}</pre>`;
+    displayMessage('Formulário enviado (simulação concluída).', 'success');
+  });
+
+  // exibe mensagens temporárias
+  function displayMessage(text, type='info') {
+    output.innerHTML = `<div class="${type==='error'?'error':type==='success'?'success':'small'}">${text}</div>`;
+    setTimeout(()=>{ if (output) output.innerHTML=''; }, 6000);
+  }
+
+  // máscaras e atualizações ao digitar
+  ['input','change'].forEach(evt=>{
+    form.addEventListener(evt, (e) => {
+      if (!e.target) return;
+      if (e.target.id === 'cpf') {
+        e.target.value = maskCPF(e.target.value || '');
+      }
+      updateProgress();
+    }, {capture:true});
+  });
+
+  // init
+  updateProgress();
+
+  // acessibilidade: foco inicial no nome
+  document.getElementById('nome').focus();
+</script>
+</body>
+</html>
